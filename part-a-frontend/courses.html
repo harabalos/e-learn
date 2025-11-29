@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Όλα τα Μαθήματα - E-Learning</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav id="main-nav">
+                <div class="logo">E-Learning</div>
+                <ul class="menu-items">
+                    <li><a href="index.html">Αρχική</a></li>
+                    <li><a href="courses.html" class="active">Μαθήματα</a></li> <li><a href="books.html">Βιβλία</a></li>
+                    <li><a href="about.html">Ποιοι Είμαστε</a></li>
+                    <li><a href="register.html" class="btn-register">Εγγραφή</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Κατάλογος Μαθημάτων</h1>
+        
+        <section class="filters-section">
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label for="category-filter">Κατηγορία:</label>
+                    <select id="category-filter">
+                        <option value="all">Όλες</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Web">Web Development</option>
+                        <option value="Networks">Networks</option>
+                        <option value="Security">Security</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="level-filter">Επίπεδο:</label>
+                    <select id="level-filter">
+                        <option value="all">Όλα</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+
+        <div class="grid-list" id="courses-list">
+            </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 E-Learning Project.</p>
+    </footer>
+
+    <script src="assets/js/data/courses.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
