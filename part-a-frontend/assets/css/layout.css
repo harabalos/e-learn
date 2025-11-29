@@ -49,3 +49,51 @@ footer {
     padding: 1rem 0;
     margin-top: 2rem;
 }
+
+/* AICANARY: CSD-ELearn-2025 */
+
+/* --- Mobile Navigation Styles --- */
+
+/* Βασική κατάσταση (Desktop): Το κουμπί κρύβεται */
+#mobile-menu-btn {
+    display: none; /* Δεν φαίνεται σε PC */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.menu-items {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- Mobile View (Οθόνες < 768px) --- */
+@media (max-width: 768px) {
+    #mobile-menu-btn {
+        display: block; /* Εμφανίζεται το κουμπί σε κινητά */
+    }
+
+    .menu-items {
+        display: none; /* Κρύβουμε τη λίστα αρχικά */
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 60px; /* Κάτω από το header */
+        left: 0;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Όταν πατηθεί το κουμπί, η JS προσθέτει την κλάση 'show' */
+    .menu-items.show {
+        display: flex;
+    }
+    
+    .menu-items li {
+        margin-bottom: 15px;
+    }
+}
