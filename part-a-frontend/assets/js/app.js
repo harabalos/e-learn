@@ -1,29 +1,45 @@
-// AICANARY: CSD-ELearn-2025
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Ελέγχουμε αν είμαστε σε σελίδα που πρέπει να δείξει μαθήματα
-    // Ψάχνουμε το container με id="courses-list" (το βάλαμε στο index.html)
     const coursesContainer = document.getElementById("courses-list");
+    const categoryFilter = document.getElementById("category-filter");
+    const levelFilter = document.getElementById("level-filter");
 
-    if (coursesContainer && typeof coursesData !== 'undefined') {
-        // Αν βρεθεί το container και υπάρχουν δεδομένα, καλούμε τη συνάρτηση render
+    if (typeof coursesData !== 'undefined' && coursesContainer) {
+        
         renderCourses(coursesData, coursesContainer);
+
+        if (categoryFilter && levelFilter) {
+            
+            const filterHandler = () => {
+                const selectedCategory = categoryFilter.value;
+                const selectedLevel = levelFilter.value;
+
+                //Φιλτράρισμα του coursesData
+                const filteredCourses = coursesData.filter(course => {
+                    const matchCategory = (selectedCategory === 'all') || (course.category === selectedCategory);
+                    const matchLevel = (selectedLevel === 'all') || (course.level === selectedLevel);
+
+                    return matchCategory && matchLevel;
+                });
+
+                renderCourses(filteredCourses, coursesContainer);
+            };
+
+            categoryFilter.addEventListener("change", filterHandler);
+            levelFilter.addEventListener("change", filterHandler);
+        }
     }
 });
 
-/**
- * Συνάρτηση που δημιουργεί HTML κάρτες για κάθε μάθημα
- * @param {Array} courses - Ο πίνακας με τα μαθήματα
- * @param {HTMLElement} container - Το στοιχείο HTML που θα τα βάλουμε μέσα
- */
 function renderCourses(courses, container) {
-    // Καθαρίζουμε τα περιεχόμενα (για ασφάλεια)
     container.innerHTML = "";
 
-    // Για κάθε μάθημα στον πίνακα...
+    if (courses.length === 0) {
+        container.innerHTML = "<p>Δεν βρέθηκαν μαθήματα με αυτά τα κριτήρια.</p>";
+        return;
+    }
+
     courses.forEach(course => {
-        // Δημιουργούμε ένα HTML string για την κάρτα
-        // Χρησιμοποιούμε Template Literals (με τα backticks ` `)
         const courseHTML = `
             <article class="course-card">
                 <img src="${course.image}" alt="${course.title}">
@@ -38,8 +54,6 @@ function renderCourses(courses, container) {
                 </div>
             </article>
         `;
-
-        // Προσθέτουμε το HTML στο container
         container.innerHTML += courseHTML;
     });
 }

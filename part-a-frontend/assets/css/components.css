@@ -62,3 +62,36 @@
     margin-bottom: 15px;
     flex-grow: 1;
 }
+
+.filters-section {
+    background-color: var(--white);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#filter-form {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 150px;
+}
