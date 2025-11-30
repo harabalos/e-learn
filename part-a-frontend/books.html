@@ -36,29 +36,8 @@
         <p>&copy; 2025 E-Learning Project.</p>
     </footer>
 
-    <script src="assets/js/data/books.js"></script> <script src="assets/js/ui/menu.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("books-list");
-            if (typeof booksData !== 'undefined' && container) {
-                booksData.forEach(book => {
-                    container.innerHTML += `
-                        <article class="course-card"> <img src="${book.image}" alt="${book.title}" style="height: 250px;">
-                            <div class="course-content">
-                                <div class="course-meta">
-                                    <span class="category">📖 ${book.category}</span>
-                                    <span class="level">${book.price}</span>
-                                </div>
-                                <h3>${book.title}</h3>
-                                <p class="course-desc">${book.desc}</p>
-                                <button class="btn" onclick="alert('Το βιβλίο προστέθηκε στο καλάθι!')">Αγορά</button>
-                            </div>
-                        </article>
-                    `;
-                });
-            }
-        });
-    </script>
+    <script src="assets/js/data/books.js"></script>
+    <script src="assets/js/ui/menu.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
