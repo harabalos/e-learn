@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Βιβλία - E-Learning</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav id="main-nav">
+                <div class="logo">E-Learning</div>
+                <button id="mobile-menu-btn" aria-label="Menu">☰</button>
+                <ul class="menu-items">
+                    <li><a href="index.html">Αρχική</a></li>
+                    <li><a href="courses.html">Μαθήματα</a></li>
+                    <li><a href="books.html" class="active">Βιβλία</a></li>
+                    <li><a href="about.html">Ποιοι Είμαστε</a></li>
+                    <li><a href="register.html" class="btn-register">Εγγραφή</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Προτεινόμενα Βιβλία</h1>
+        <div class="grid-list" id="books-list"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 E-Learning Project.</p>
+    </footer>
+
+    <script src="assets/js/data/books.js"></script> <script src="assets/js/ui/menu.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("books-list");
+            if (typeof booksData !== 'undefined' && container) {
+                booksData.forEach(book => {
+                    container.innerHTML += `
+                        <article class="course-card"> <img src="${book.image}" alt="${book.title}" style="height: 250px;">
+                            <div class="course-content">
+                                <div class="course-meta">
+                                    <span class="category">📖 ${book.category}</span>
+                                    <span class="level">${book.price}</span>
+                                </div>
+                                <h3>${book.title}</h3>
+                                <p class="course-desc">${book.desc}</p>
+                                <button class="btn" onclick="alert('Το βιβλίο προστέθηκε στο καλάθι!')">Αγορά</button>
+                            </div>
+                        </article>
+                    `;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
