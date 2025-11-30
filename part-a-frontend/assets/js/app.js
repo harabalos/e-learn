@@ -2,51 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const coursesContainer = document.getElementById("courses-list");
     const categoryFilter = document.getElementById("category-filter");
     const levelFilter = document.getElementById("level-filter");
-    const searchInput = document.getElementById("search-input"); // Input αναζήτησης
+    const searchInput = document.getElementById("search-input");
 
-    // Έλεγχος αν υπάρχουν τα δεδομένα και το container των μαθημάτων
     if (typeof coursesData !== 'undefined' && coursesContainer) {
-        
-        // 1. Αρχική εμφάνιση όλων των μαθημάτων
         renderCourses(coursesData, coursesContainer);
 
-        // 2. Συνάρτηση που τρέχει κάθε φορά που αλλάζει κάποιο φίλτρο
         const filterHandler = () => {
-            // Διάβασμα τιμών (αν υπάρχουν τα στοιχεία, αλλιώς default)
             const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
             const selectedLevel = levelFilter ? levelFilter.value : 'all';
             const searchText = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-            // Φιλτράρισμα του πίνακα coursesData
             const filteredCourses = coursesData.filter(course => {
-                // Έλεγχος Κατηγορίας
                 const matchCategory = (selectedCategory === 'all') || (course.category === selectedCategory);
-                // Έλεγχος Επιπέδου
                 const matchLevel = (selectedLevel === 'all') || (course.level === selectedLevel);
-                // Έλεγχος Αναζήτησης (στον τίτλο)
                 const matchSearch = course.title.toLowerCase().includes(searchText);
-
-                // Πρέπει να ισχύουν ΟΛΑ (AND logic)
                 return matchCategory && matchLevel && matchSearch;
             });
-
-            // Εμφάνιση των φιλτραρισμένων
             renderCourses(filteredCourses, coursesContainer);
         };
 
-        // 3. Σύνδεση με τα Events
         if (categoryFilter) categoryFilter.addEventListener("change", filterHandler);
         if (levelFilter) levelFilter.addEventListener("change", filterHandler);
         if (searchInput) searchInput.addEventListener("input", filterHandler);
     }
 
-
     const booksContainer = document.getElementById("books-list");
-    
-    // Έλεγχος αν υπάρχουν τα δεδομένα και το container των βιβλίων
     if (typeof booksData !== 'undefined' && booksContainer) {
-        
-        // 1. Δημιουργία HTML για κάθε βιβλίο
         booksData.forEach(book => {
             booksContainer.innerHTML += `
                 <article class="course-card">
@@ -58,15 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <h3>${book.title}</h3>
                         <p class="course-desc">${book.desc}</p>
-                        <!-- Χρήση data attribute για να ξέρουμε ποιο βιβλίο πατήθηκε -->
                         <button class="btn btn-buy" data-title="${book.title}">Αγορά</button>
                     </div>
                 </article>
             `;
         });
 
-        // 2. Event Delegation για τα κουμπιά "Αγορά"
-        // (Αντί για onclick="" στο HTML, ακούμε τα κλικ στο container)
         booksContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-buy')) {
                 const bookTitle = e.target.getAttribute('data-title');
@@ -74,20 +52,50 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const videosContainer = document.getElementById("videos-list");
+    // Ελέγχουμε αν υπάρχει ο container (είμαστε στη σελίδα videos.html) και τα δεδομένα
+    if (typeof videosData !== 'undefined' && videosContainer) {
+        videosData.forEach(video => {
+            videosContainer.innerHTML += `
+                <article class="course-card">
+                    <!-- Responsive Video Embed Container -->
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                        <iframe 
+                            src="${video.url}" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                            title="${video.title}"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <span class="category">🎥 ${video.category}</span>
+                        </div>
+                        <h3>${video.title}</h3>
+                        <p class="course-desc">${video.desc}</p>
+                    </div>
+                </article>
+            `;
+        });
+    }
 });
+
 
 function renderCourses(courses, container) {
     container.innerHTML = "";
-
     if (courses.length === 0) {
-        container.innerHTML = "<p>Δεν βρέθηκαν μαθήματα με αυτά τα κριτήρια.</p>";
+        container.innerHTML = "<p>Δεν βρέθηκαν αποτελέσματα.</p>";
         return;
     }
-
     courses.forEach(course => {
         const courseHTML = `
             <article class="course-card">
-                <img src="${course.image}" alt="${course.title}">
+                <img 
+                    src="${course.image}" 
+                    srcset="${course.image} 400w, ${course.image} 800w" 
+                    sizes="(max-width: 600px) 100vw, 400px"
+                    alt="${course.title}">
                 <div class="course-content">
                     <div class="course-meta">
                         <span class="category">📂 ${course.category}</span>
