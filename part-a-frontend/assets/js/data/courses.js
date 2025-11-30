@@ -6,7 +6,7 @@ const coursesData = [
         title: "Εισαγωγή στην Python",
         category: "Programming",
         level: "Beginner",
-        image: "assets/img/thumbnails/python.jpg", // Θα βάλουμε placeholder εικόνα
+        image: "assets/img/thumbnail/python.jpg",
         desc: "Μάθετε τις βασικές αρχές προγραμματισμού με την πιο δημοφιλή γλώσσα."
     },
     {
@@ -14,7 +14,7 @@ const coursesData = [
         title: "Ανάπτυξη Web με HTML & CSS",
         category: "Web",
         level: "Beginner",
-        image: "assets/img/thumbnails/web.jpg",
+        image: "assets/img/thumbnail/web.jpg",
         desc: "Δημιουργήστε μοντέρνες και responsive ιστοσελίδες από το μηδέν."
     },
     {
@@ -22,7 +22,7 @@ const coursesData = [
         title: "Δίκτυα Υπολογιστών: CCNA",
         category: "Networks",
         level: "Advanced",
-        image: "assets/img/thumbnails/networks.jpg",
+        image: "assets/img/thumbnail/networks.jpg",
         desc: "Πλήρης οδηγός για την πιστοποίηση δικτύων και το routing."
     },
     {
@@ -30,7 +30,7 @@ const coursesData = [
         title: "Ασφάλεια Πληροφοριακών Συστημάτων",
         category: "Security",
         level: "Intermediate",
-        image: "assets/img/thumbnails/security.jpg",
+        image: "assets/img/thumbnail/security.jpg",
         desc: "Προστατέψτε συστήματα από κυβερνοεπιθέσεις και hacking."
     },
     {
@@ -38,7 +38,7 @@ const coursesData = [
         title: "JavaScript Masterclass",
         category: "Programming",
         level: "Advanced",
-        image: "assets/img/thumbnails/js.jpg",
+        image: "assets/img/thumbnail/js.jpg",
         desc: "Προχωρημένες τεχνικές JS για σύγχρονες web εφαρμογές."
     }
 ];
