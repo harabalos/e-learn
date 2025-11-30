@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ποιοι Είμαστε - E-Learning</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav id="main-nav">
+                <div class="logo">E-Learning</div>
+                <button id="mobile-menu-btn" aria-label="Menu">☰</button>
+                <ul class="menu-items">
+                    <li><a href="index.html">Αρχική</a></li>
+                    <li><a href="courses.html">Μαθήματα</a></li>
+                    <li><a href="books.html">Βιβλία</a></li>
+                    <li><a href="about.html" class="active">Ποιοι Είμαστε</a></li>
+                    <li><a href="register.html" class="btn-register">Εγγραφή</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="about-section" style="max-width: 800px; margin: 0 auto;">
+            <h1>Η Ομάδα Μας</h1>
+            <p class="lead">Είμαστε φοιτητές του τμήματος Πληροφορικής του ΟΠΑ και αναπτύξαμε αυτή την πλατφόρμα στα πλαίσια του μαθήματος "Τεχνολογίες Ιστού".</p>
+            
+            <div class="grid-list" style="margin-top: 40px;">
+                <article class="course-card" style="text-align: center; padding: 20px;">
+                    <img src="assets/img/team/student1.png" alt="Φοιτητής 1" style="border-radius: 50%; width: 150px; height: 150px; margin: 0 auto;">
+                    <h3>Όνομα Φοιτητή 1</h3>
+                    <p>Α.Μ: P3xxxxxx</p>
+                    <p>Frontend Developer</p>
+                </article>
+
+                <article class="course-card" style="text-align: center; padding: 20px;">
+                    <img src="assets/img/team/student2.png" alt="Φοιτητής 2" style="border-radius: 50%; width: 150px; height: 150px; margin: 0 auto;">
+                    <h3>Όνομα Φοιτητή 2</h3>
+                    <p>Α.Μ: P3yyyyyy</p>
+                    <p>UI/UX Designer</p>
+                </article>
+            </div>
+            
+            <div style="margin-top: 50px; background: #fff; padding: 20px; border-radius: 8px;">
+                <h2>Σχετικά με το Project</h2>
+                <p>Η εφαρμογή υλοποιήθηκε με χρήση HTML5, CSS3 και Vanilla JavaScript. Ακολουθεί αρχιτεκτονική Mobile-First και φορτώνει δεδομένα δυναμικά χωρίς τη χρήση server-side κώδικα (Part A).</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 E-Learning Project.</p>
+    </footer>
+
+    <script src="assets/js/ui/menu.js"></script>
+</body>
+</html>
