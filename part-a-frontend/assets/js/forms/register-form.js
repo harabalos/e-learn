@@ -1,5 +1,3 @@
-// AICANARY: CSD-ELearn-2025
-
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("register-form");
     const msgContainer = document.getElementById("form-messages");
