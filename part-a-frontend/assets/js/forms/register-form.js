@@ -35,8 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Έλεγχος Κωδικού
-            if (password.length < 6) {
-                showError("password", "Ο κωδικός πρέπει να είναι τουλάχιστον 6 χαρακτήρες.");
+            if (password.length < 8) { // Αυξάνουμε το ελάχιστο μήκος για καλύτερη ασφάλεια
+                showError("password", "Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες.");
+                isValid = false;
+            } else if (!/[A-Z]/.test(password)) { // Έλεγχος για τουλάχιστον έναν κεφαλαίο
+                showError("password", "Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν κεφαλαίο χαρακτήρα.");
+                isValid = false;
+            } else if (!/[a-z]/.test(password)) { // Έλεγχος για τουλάχιστον έναν πεζό
+                showError("password", "Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν πεζό χαρακτήρα.");
+                isValid = false;
+            } else if (!/\d/.test(password)) { // Έλεγχος για τουλάχιστον έναν αριθμό
+                showError("password", "Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν αριθμό.");
                 isValid = false;
             }
 
@@ -47,27 +56,73 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // 4. Αν όλα είναι έγκυρα -> Αποθήκευση & Εμφάνιση
+            // Τώρα θα εμφανίσουμε σύνοψη για επιβεβαίωση πριν την τελική "αποθήκευση"
             if (isValid) {
                 const user = {
                     fullname: fullname,
                     email: email,
-                    // Δεν αποθηκεύουμε κωδικούς σε plain text σε real app, αλλά εδώ είναι simulation
-                    joined: new Date().toLocaleDateString()
+                    // Για τη σύνοψη, μπορούμε να συμπεριλάβουμε τον κωδικό (μασκαρισμένο)
+                    // Σε πραγματική εφαρμογή, δεν θα τον εμφανίζαμε ποτέ.
+                    password: password, 
+                    // Εδώ θα προσθέτατε και τα άλλα πεδία της φόρμας (ενδιαφέροντα, ηλικία, κλπ.)
+                    // π.χ. interests: getSelectedInterests(),
+                    //      dob: document.getElementById("dob").value,
                 };
 
-                // Αποθήκευση στο LocalStorage (Simulation Database)
-                localStorage.setItem("elearning_user", JSON.stringify(user));
-
-                // Εμφάνιση μηνύματος επιτυχίας
-                form.style.display = "none"; // Κρύβουμε τη φόρμα
+                // Κρύβουμε τη φόρμα και εμφανίζουμε τη σύνοψη
+                form.style.display = "none";
                 msgContainer.innerHTML = `
-                    <div class="success-box">
-                        <h3>🎉 Επιτυχής Εγγραφή!</h3>
-                        <p>Καλώς ήρθατε, <strong>${user.fullname}</strong>.</p>
-                        <p>Τα στοιχεία σας αποθηκεύτηκαν τοπικά στον browser.</p>
-                        <a href="index.html" class="btn">Επιστροφή στην Αρχική</a>
+                    <div class="confirmation-box">
+                        <h3>Επιβεβαίωση Στοιχείων Εγγραφής</h3>
+                        <p>Παρακαλώ ελέγξτε τα στοιχεία σας πριν την οριστική εγγραφή:</p>
+                        <ul>
+                            <li><strong>Πλήρες Όνομα:</strong> ${user.fullname}</li>
+                            <li><strong>Email:</strong> ${user.email}</li>
+                            <li><strong>Κωδικός:</strong> ${'*'.repeat(user.password.length)} (Επιτυχής εισαγωγή)</li>
+                            <!-- Εδώ θα προσθέτατε και τα άλλα στοιχεία για επιβεβαίωση -->
+                        </ul>
+                        <div class="confirmation-actions">
+                            <button type="button" id="confirm-registration" class="btn btn-primary">Επιβεβαίωση & Εγγραφή</button>
+                            <button type="button" id="edit-registration" class="btn btn-secondary">Επεξεργασία</button>
+                        </div>
                     </div>
                 `;
+
+                // Προσθήκη event listeners για τα κουμπιά επιβεβαίωσης/επεξεργασίας
+                document.getElementById("confirm-registration").addEventListener("click", () => {
+                    // Τελική αποθήκευση στο LocalStorage (Simulation Database)
+                    const finalUser = {
+                        fullname: user.fullname,
+                        email: user.email,
+                        // Δεν αποθηκεύουμε κωδικούς σε plain text σε real app!
+                        // Εδώ αποθηκεύουμε μόνο τα μη ευαίσθητα δεδομένα.
+                        joined: new Date().toLocaleDateString(),
+                        // Προσθέστε και τα άλλα πεδία που θέλετε να αποθηκεύσετε μόνιμα
+                    };
+                    localStorage.setItem("elearning_user", JSON.stringify(finalUser));
+
+                    // Εμφάνιση μηνύματος επιτυχίας
+                    msgContainer.innerHTML = `
+                        <div class="success-box">
+                            <h3>🎉 Επιτυχής Εγγραφή!</h3>
+                            <p>Καλώς ήρθατε, <strong>${finalUser.fullname}</strong>.</p>
+                            <p>Τα στοιχεία σας αποθηκεύτηκαν τοπικά στον browser.</p>
+                            <a href="index.html" class="btn">Επιστροφή στην Αρχική</a>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("edit-registration").addEventListener("click", () => {
+                    // Εμφανίζουμε ξανά τη φόρμα και καθαρίζουμε τη σύνοψη
+                    form.style.display = "block";
+                    msgContainer.innerHTML = ""; // Καθαρίζουμε τη σύνοψη
+                    // Προαιρετικά: Προσυμπληρώνουμε τα πεδία της φόρμας με τα υπάρχοντα στοιχεία
+                    document.getElementById("fullname").value = user.fullname;
+                    document.getElementById("email").value = user.email;
+                    document.getElementById("password").value = user.password;
+                    document.getElementById("confirm-password").value = user.password;
+                    clearErrors(); // Καθαρίζουμε τυχόν παλιά σφάλματα
+                });
             }
         });
     }
