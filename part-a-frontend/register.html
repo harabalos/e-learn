@@ -52,13 +52,26 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">Κωδικός *</label>
-                        <input type="password" id="password" name="password" required minlength="6">
-                        <small>Τουλάχιστον 6 χαρακτήρες.</small>
+                        <input type="password" id="password" name="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Ο κωδικός πρέπει να περιέχει τουλάχιστον 8 χαρακτήρες, συμπεριλαμβανομένων κεφαλαίων, πεζών και αριθμών.">
+                        <small>Τουλάχιστον 8 χαρακτήρες, με κεφαλαία, πεζά & αριθμούς.</small>
+                        <span class="error-msg">Ο κωδικός δεν πληροί τις προϋποθέσεις.</span>
                     </div>
                     <div class="form-group">
                         <label for="confirm-password">Επιβεβαίωση Κωδικού *</label>
                         <input type="password" id="confirm-password" name="confirm-password" required>
                         <span class="error-msg">Οι κωδικοί δεν ταιριάζουν.</span>
+                    </div>
+                </div>
+
+                <hr>
+                <h3>Πείτε μας λίγα λόγια για εσάς</h3>
+                <p>Αυτές οι πληροφορίες θα μας βοηθήσουν να σας προτείνουμε τα κατάλληλα μαθήματα.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Ημερομηνία Γέννησης *</label>
+                        <input type="date" id="dob" name="dob" required>
+                        <span class="error-msg">Η ημερομηνία γέννησης είναι υποχρεωτική.</span>
                     </div>
                 </div>
 
@@ -79,6 +92,12 @@
                         <label><input type="checkbox" name="interests" value="network"> Δίκτυα</label>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="goals">Ποιοι είναι οι μαθησιακοί σας στόχοι;</label>
+                    <textarea id="goals" name="goals" rows="4" placeholder="π.χ. 'Θέλω να μάθω να φτιάχνω ιστοσελίδες' ή 'Ενδιαφέρομαι για την κυβερνοασφάλεια'"></textarea>
+                </div>
+
 
                 <button type="submit" class="btn btn-large">Ολοκλήρωση Εγγραφής</button>
             </form>
